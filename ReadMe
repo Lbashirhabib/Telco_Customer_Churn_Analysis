@@ -1,0 +1,88 @@
+## Telco Customer Churn Analysis
+
+## Project Overview
+This project focuses on analyzing customer churn for a telecommunications company. Churn, in this context, refers to customers who have discontinued their service. Understanding why customers leave is critical for the business, as retaining existing customers is far more cost-effective than acquiring new ones. This analysis aims to uncover patterns and factors that contribute to churn, using data exploration and predictive modeling.
+
+I walked through the entire data science pipeline—from loading and cleaning the data, exploring features and relationships, to building and evaluating machine learning models. The goal was not just to predict churn, but to understand the driving factors behind it so the company can take proactive steps to improve customer retention.
+
+What is Churn?
+In the telecom industry, churn indicates whether a customer has left the company. In the dataset, this is captured in the Churn column: “Yes” means the customer has churned, and “No” means they are still active.
+
+Why does churn matter?
+
+It directly impacts recurring revenue.
+Acquiring a new customer can cost 5 to 25 times more than retaining an existing one.
+Long-term customers tend to bring more value over time.
+High churn rates can signal problems with service quality or competitive disadvantages.
+
+## Dataset
+The dataset used is the WA_Fn-UseC_-Telco-Customer-Churn.csv file, which contains 7,043 customer records and 21 features. These features include customer demographics, account information, service subscriptions, and billing details.
+
+Steps Taken
+1. Data Cleaning and Preparation
+First, I loaded the data and inspected it for missing values, incorrect data types, and inconsistencies. Interestingly, the dataset didn’t have explicit missing values, but I found that the TotalCharges column was stored as text and contained empty strings for some new customers. I converted it to numeric, filling those empty entries with 0.
+
+I also removed the customerID column since it’s not useful for modeling.
+
+2. Feature Engineering and Encoding
+Many columns were categorical (Yes/No or multiple categories). To prepare the data for modeling, I:
+
+Consolidated service-related columns like OnlineSecurity and StreamingTV by replacing “No internet service” and “No phone service” with simple “No” values.
+
+Encoded binary Yes/No columns to 1/0.
+
+Mapped gender to numeric values and transformed Contract into an ordinal feature (Month-to-month: 0, One year: 1, Two year: 2).
+
+Applied one-hot encoding to the PaymentMethod column.
+
+3. Exploratory Data Analysis (EDA)
+Before modeling, I explored the data to understand the distribution of churn and relationships between features.
+
+The dataset is imbalanced: about 26.5% of customers churned, while 73.5% stayed. This is an important consideration for model selection and evaluation.
+
+Visualizations were created to examine how churn correlates with tenure, monthly charges, contract type, and other services. These insights helped inform which features might be most predictive.
+
+4. Modeling Approach
+I used two classification models to predict churn:
+
+Random Forest Classifier
+
+Logistic Regression
+
+The data was split into training and testing sets, and features were scaled for logistic regression. Both models were evaluated using metrics like accuracy, precision, recall, F1-score, and AUC-ROC.
+
+5. Results and Interpretation
+The models provided a baseline understanding of which factors contribute to churn. Features like tenure, contract type, and monthly charges appeared significant. The Random Forest model also offered feature importance scores, highlighting which customer attributes the company should focus on to reduce churn.
+
+Key Takeaways
+Customers with shorter tenures and month-to-month contracts are more likely to churn.
+
+Higher monthly charges, especially without long-term contracts, correlate with increased churn.
+
+Services like tech support and online security are associated with higher retention.
+
+The dataset’s imbalance requires careful metric selection—accuracy alone can be misleading.
+
+Challenges Faced
+Handling categorical variables without introducing bias during encoding.
+
+Managing class imbalance to avoid a model that simply predicts “no churn” for every customer.
+
+Interpreting model results in a business context to provide actionable recommendations.
+
+How to Run This Project
+If you’d like to explore or extend this analysis:
+
+Clone the repository.
+
+Ensure you have the required libraries: pandas, numpy, matplotlib, seaborn, scikit-learn.
+
+Place the dataset (WA_Fn-UseC_-Telco-Customer-Churn.csv) in the project directory.
+
+Run the Jupyter notebook Telco_customer_churn_Analysis.ipynb cell by cell.
+
+Final Thoughts
+This project was a meaningful exercise in using data to solve a real business problem. By understanding what drives customer churn, telecom companies can develop targeted retention strategies—whether that’s through personalized offers, improved service packages, or proactive customer support.
+
+The notebook reflects a complete workflow, from raw data to actionable insights, and I’m open to feedback or suggestions for improvement.
+
